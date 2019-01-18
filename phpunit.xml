@@ -1,5 +1,5 @@
-<!-- Adding xml file to be able to filter tests when being run -->
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Adding xml file to be able to filter tests when being run -->
 <phpunit
         colors="true"
         processIsolation="false"
