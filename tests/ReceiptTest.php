@@ -16,19 +16,26 @@ class ReceiptTest extends TestCase {
     public function tearDown() {
         unset($this->Receipt);
     }
-    // Refactoring testTotal that sums the total
-    public function testTotal() {
-        //Add predefined variables to the method
-        $input = [0,2,5,8];
+    /**
+     * @dataProvider provideTotal
+     */
+    public function testTotal($items, $expected) {
         $coupon = null;
-        $output = $this->Receipt->total($input, $coupon);
-        //Asserting predefined sum value
+        $output = $this->Receipt->total($items, $coupon);
+        //Asserting testTotal expected value
         $this->assertEquals(
-            15,
-            //Error message
+            $expected,
             $output,
-            'Sum must be 15'
+            "The total sum should equal {$expected}"
         );
+    }
+    //Adding dataprovider function that lays out different use cases of values
+    public function provideTotal() {
+        return [
+            [[1,2,5,8], 16],
+            [[-1,2,5,8], 14],
+            [[1,2,8], 11],
+        ];
     }
     //Adding a function to sum the total with discount coupon with Arrange-Act-Assert
     public function testTotalAndCoupon() {
