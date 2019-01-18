@@ -52,6 +52,16 @@ class ReceiptTest extends TestCase {
             'When summing the total should equal 12'
         );
     }
+
+    //Adding a function for test totalling exception
+    public function testTotalException() {
+        $input = [0,2,5,8];
+        //Add an exception coupon value, higher than 1.00
+        $coupon = 1.20;
+        //Using phpunit method expectException directly
+        $this->expectException('BadMethodCallException');
+        $this->Receipt->total($input, $coupon);
+    }
         //Adding a mock method testPostTaxTotal that uses MockBuilder class and Arrange-Act-Assert
         public function testPostTaxTotal() {
             //Add predefined variables to the method

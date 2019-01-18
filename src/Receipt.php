@@ -1,8 +1,17 @@
 <?php
 namespace TDD;
+
+//Import BadMethodCallException
+use \BadMethodCallException;
+
 class Receipt {
     // Adding coupon calculation to total
     public function total(array $items = [], $coupon) {
+        //Check if coupon is greater tha 1.00
+        if ($coupon > 1.00) {
+            //then call an error message
+            throw new BadMethodCallException('Coupon must be less than or equal to 1.00');
+        }
         $sum = array_sum($items);
         if (!is_null($coupon)) {
             return $sum - ($sum * $coupon);
