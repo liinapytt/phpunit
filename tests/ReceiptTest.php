@@ -2,24 +2,27 @@
 namespace TDD\Test;
 require "vendor\autoload.php";
 
+//Define classes used
 use PHPUnit\Framework\TestCase;
 use TDD\Receipt;
 
+//Add class ReceiptTest that extends am abstract TestCase class
 class ReceiptTest extends TestCase {
-    //Adding new method setUp to provide instance of class
+    //Adding new method setUp that is used before every test method
     public function setUp() {
         $this->Receipt = new Receipt();
     }
-    //Adding new method tearDown to let out test in isolation
+    //Adding new method tearDown to let use test in isolation, erases Receipt from memory
     public function tearDown() {
         unset($this->Receipt);
     }
-    // Refactoring testTotal
+    // Refactoring testTotal that sums the total
     public function testTotal() {
+        //Add predefined variables to the method
         $input = [0,2,5,8];
         $coupon = null;
         $output = $this->Receipt->total($input, $coupon);
-        //Asserting predefined value
+        //Asserting predefined sum value
         $this->assertEquals(
             15,
             //Error message
@@ -27,12 +30,13 @@ class ReceiptTest extends TestCase {
             'Sum must be 15'
         );
     }
-    //Adding a function to sum the total with discount coupon
+    //Adding a function to sum the total with discount coupon with Arrange-Act-Assert
     public function testTotalAndCoupon() {
+        //Add predefined variables to the method
         $input = [0,2,5,8];
         $coupon = 0.20;
         $output = $this->Receipt->total($input, $coupon);
-        //Asserting predefined value
+        //Asserting predefined sum value
         $this->assertEquals(
             12,
             //Error message
@@ -40,10 +44,10 @@ class ReceiptTest extends TestCase {
             'When summing the total should equal 12'
         );
     }
-    //Adding a mock method testPostTaxTotal that uses MockBuilder class
-    public function testPostTaxTotal() {
-        //Add predefined variables to the method
-        $items = [1,2,5,8];
+        //Adding a mock method testPostTaxTotal that uses MockBuilder class and Arrange-Act-Assert
+        public function testPostTaxTotal() {
+            //Add predefined variables to the method
+            $items = [1,2,5,8];
         $tax = 0.20;
         $coupon = null;
         $Receipt = $this->getMockBuilder('TDD\Receipt')
@@ -61,7 +65,7 @@ class ReceiptTest extends TestCase {
         $this->assertEquals(11.00, $result);
     }
 
-    // Adding a new method testTax according to Add-Act-Assert
+    // Adding a new method testTax according to Arrange-Act-Assert
     public function testTax() {
         $inputAmount = 10.00;
         $taxInput = 0.10;
