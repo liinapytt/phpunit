@@ -23,5 +23,16 @@ class ReceiptTest extends TestCase {
             $output,
             'Sum must be 15'
         );
-}
+    }
+    // Adding a new method testTax according to Add-Act-Assert
+    public function testTax() {
+        $inputAmount = 10.00;
+        $taxInput = 0.10;
+        $output = $this->Receipt->tax($inputAmount, $taxInput);
+        $this->assertEquals(
+            1.00,
+            $output,
+            'The tax calculation should equal 1.00'
+        );
+    }
 }
