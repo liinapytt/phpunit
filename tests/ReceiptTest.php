@@ -19,8 +19,10 @@ class ReceiptTest extends TestCase {
         $input = [0,2,5,8];
         $coupon = null;
         $output = $this->Receipt->total($input, $coupon);
+        //Asserting predefined value
         $this->assertEquals(
             15,
+            //Error message
             $output,
             'Sum must be 15'
         );
@@ -30,20 +32,30 @@ class ReceiptTest extends TestCase {
         $input = [0,2,5,8];
         $coupon = 0.20;
         $output = $this->Receipt->total($input, $coupon);
+        //Asserting predefined value
         $this->assertEquals(
             12,
+            //Error message
             $output,
             'When summing the total should equal 12'
         );
     }
     //Adding a mock method testPostTaxTotal that uses MockBuilder class
     public function testPostTaxTotal() {
+        //Add predefined variables to the method
+        $items = [1,2,5,8];
+        $tax = 0.20;
+        $coupon = null;
         $Receipt = $this->getMockBuilder('TDD\Receipt')
             ->setMethods(['tax', 'total'])
             ->getMock();
-        $Receipt->method('total')
+        $Receipt->expects($this->once())
+            ->method('total')
+            ->with($items, $coupon)
             ->will($this->returnValue(10.00));
-        $Receipt->method('tax')
+        $Receipt->expects($this->once())
+            ->method('tax')
+            ->with(10.00, $tax)
             ->will($this->returnValue(1.00));
         $result = $Receipt->postTaxTotal([1,2,5,8], 0.20, null);
         $this->assertEquals(11.00, $result);
