@@ -29,10 +29,11 @@ class ReceiptTest extends TestCase {
             "The total sum should equal {$expected}"
         );
     }
-    //Adding dataprovider function that lays out different use cases of values
+    //Adding dataprovider function that lays out different input values
     public function provideTotal() {
         return [
-            [[1,2,5,8], 16],
+            //Different inputs
+            'inputs totaling 16' => [[1,2,5,8], 16],
             [[-1,2,5,8], 14],
             [[1,2,8], 11],
         ];
