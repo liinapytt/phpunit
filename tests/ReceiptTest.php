@@ -68,6 +68,7 @@ class ReceiptTest extends TestCase {
             $items = [1,2,5,8];
         $tax = 0.20;
         $coupon = null;
+        //use the getMockBuilder method from PHPUnit framework
         $Receipt = $this->getMockBuilder('TDD\Receipt')
             ->setMethods(['tax', 'total'])
             ->getMock();
@@ -89,8 +90,11 @@ class ReceiptTest extends TestCase {
         $taxInput = 0.10;
         $output = $this->Receipt->tax($inputAmount, $taxInput);
         $this->assertEquals(
+            //expected output
             1.00,
+            // real output
             $output,
+            //Error message when output does not correspond to expected output
             'The tax calculation should equal 1.00'
         );
     }
